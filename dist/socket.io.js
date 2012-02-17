@@ -1,3 +1,14 @@
+(function () {
+  // `this` will be `global` which is `window`
+  // force this module to believe that it's in a browser
+  // since it already has its own make system which is doing
+  // so much sniffer magic
+  var xyzdule = module
+    ;
+
+  module = undefined;
+  exports = undefined;
+
 /*! Socket.IO.js build:0.8.7, development. Copyright(c) 2011 LearnBoost <dev@learnboost.com> MIT Licensed */
 
 /**
@@ -3748,3 +3759,8 @@ var swfobject=function(){var D="undefined",r="object",S="Shockwave Flash",W="Sho
   , 'undefined' != typeof io ? io : module.parent.exports
   , this
 );
+
+  module = xyzdule;
+  module.exports = global.io;
+  delete global.io;
+}).call(global);
